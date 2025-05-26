@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Cadastro de Hospital - Encontre Plantões Médicos" />
+  <meta name="keywords" content="cadastro, hospital, plantões médicos" />
+  <meta name="author" content="Lucas Tavares Hauber" />
+  <title>Cadastro de Hospital - Encontre Plantões Médicos</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { height: 100%; font-family: 'Roboto', sans-serif; }
+    body {
+      background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.8)), url('fundo.jpg') no-repeat center center fixed;
+      background-size: cover;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+    }
+    nav {
+      background: #005f87;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 30px;
+    }
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+    nav a:hover { color: #ffaa00; }
+    header {
+      text-align: center;
+      padding: 40px 20px 20px;
+      background: #0077b6;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    }
+    header h1 { font-size: 2.5em; margin-bottom: 10px; }
+    main {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    section#cadastro-hospital {
+      background: rgba(255, 255, 255, 0.98);
+      color: #333;
+      padding: 40px 30px;
+      border-radius: 12px;
+      max-width: 500px;
+      width: 100%;
+      box-shadow: 0 0 20px rgba(0,0,0,0.4);
+      animation: fadeIn 0.6s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    #cadastro-hospital h2 {
+      text-align: center;
+      margin-bottom: 25px;
+      color: #0077b6;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+    .input-group {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+    }
+    .input-group i {
+      position: absolute;
+      top: 38px;
+      left: 10px;
+      color: #999;
+    }
+    .input-group input, .input-group select {
+      padding: 10px 10px 10px 35px;
+      width: 100%;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      background: #f9f9f9;
+      font-size: 1em;
+    }
+    .input-group label {
+      margin-bottom: 5px;
+      font-weight: bold;
+      font-size: 0.9em;
+    }
+    form button {
+      background-color: #0077b6;
+      color: white;
+      padding: 12px;
+      border: none;
+      border-radius: 5px;
+      font-size: 1em;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    form button:hover { background-color: #005f87; }
+    footer {
+      background: #0077b6;
+      color: #fff;
+      text-align: center;
+      padding: 15px;
+      font-size: 0.9em;
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html">🏠 Início</a>
+    <a href="login.html">Login</a>
+  </nav>
+
+  <header>
+    <h1>Cadastro de Hospital</h1>
+    <p>Cadastre o seu hospital para começar a oferecer plantões médicos.</p>
+  </header>
+
+  <main>
+    <section id="cadastro-hospital">
+      <h2>Formulário de Cadastro</h2>
+      <form id="formCadastro">
+        <div class="input-group">
+          <label for="nomeHospital">Nome do Hospital:</label>
+          <i class="fas fa-hospital"></i>
+          <input type="text" id="nomeHospital" placeholder="Ex: Hospital São Lucas" required>
+        </div>
+
+        <div class="input-group">
+          <label for="estado">Estado:</label>
+          <select id="estado" required>
+            <option value="">Selecione o estado</option>
+          </select>
+        </div>
+
+        <div class="input-group">
+          <label for="cidade">Cidade:</label>
+          <select id="cidade" required>
+            <option value="">Selecione a cidade</option>
+          </select>
+        </div>
+
+        <div class="input-group">
+          <label for="dataDisponivel">Data Disponível:</label>
+          <input type="date" id="dataDisponivel" required>
+        </div>
+
+        <div class="input-group">
+          <label for="especialidades">Especialidades:</label>
+          <select id="especialidades" multiple>
+            <option value="Cardiologia">Cardiologia</option>
+            <option value="Neurologia">Neurologia</option>
+            <option value="Ortopedia">Ortopedia</option>
+            <option value="Pediatria">Pediatria</option>
+            <option value="Ginecologia">Ginecologia</option>
+            <option value="Clinico Geral">Clínico Geral</option>
+            <option value="Oftalmologia">Oftalmologia</option>
+          </select>
+        </div>
+
+        <button type="submit">Cadastrar Hospital</button>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Encontre Plantões Médicos. Lucas Tavares Hauber.</p>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const estadoSelect = document.getElementById('estado');
+      const cidadeSelect = document.getElementById('cidade');
+
+      // Carrega estados do IBGE
+      fetch('https://servicodados.ibge.gov.br/api/v1/localidades/estados?orderBy=nome')
+        .then(res => res.json())
+        .then(estados => {
+          estados.forEach(estado => {
+            const option = document.createElement('option');
+            option.value = estado.sigla;
+            option.textContent = estado.nome;
+            estadoSelect.appendChild(option);
+          });
+        });
+
+      // Quando o estado mudar, busca as cidades
+      estadoSelect.addEventListener('change', () => {
+        const uf = estadoSelect.value;
+        cidadeSelect.innerHTML = '<option value="">Carregando cidades...</option>';
+
+        fetch(`https://servicodados.ibge.gov.br/api/v1/localidades/estados/${uf}/municipios`)
+          .then(res => res.json())
+          .then(cidades => {
+            cidadeSelect.innerHTML = '<option value="">Selecione a cidade</option>';
+            cidades.forEach(cidade => {
+              const option = document.createElement('option');
+              option.value = cidade.nome;
+              option.textContent = cidade.nome;
+              cidadeSelect.appendChild(option);
+            });
+          });
+      });
+    });
+
+    document.getElementById('formCadastro').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const nomeHospital = document.getElementById('nomeHospital').value;
+      const estado = document.getElementById('estado').value;
+      const cidade = document.getElementById('cidade').value;
+      const dataDisponivel = document.getElementById('dataDisponivel').value;
+      const especialidades = Array.from(document.getElementById('especialidades').selectedOptions).map(opt => opt.value);
+
+      const hospital = {
+        nome: nomeHospital,
+        estado,
+        cidade,
+        dataDisponivel,
+        especialidades
+      };
+
+      let hospitais = JSON.parse(localStorage.getItem('hospitais')) || [];
+      hospitais.push(hospital);
+      localStorage.setItem('hospitais', JSON.stringify(hospitais));
+
+      alert('Hospital cadastrado com sucesso!');
+      window.location.href = 'index.html';
+    });
+  </script>
+</body>
+</html>

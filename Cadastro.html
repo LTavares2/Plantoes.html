@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Cadastre-se para encontrar plantões médicos." />
+  <meta name="keywords" content="cadastro, médicos, plantões médicos" />
+  <meta name="author" content="Seu Nome" />
+  <title>Cadastro - Encontre Plantões Médicos</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Roboto', sans-serif;
+      background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.8)), url('fundo.jpg') no-repeat center center fixed;
+      background-size: cover;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    nav {
+      background: #005f87;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 30px;
+    }
+    .nav-left, .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+    nav a:hover {
+      color: #ffaa00;
+    }
+    .login-button {
+      background-color: #ffaa00;
+      color: #333;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background 0.3s;
+      text-decoration: none;
+    }
+    .login-button:hover {
+      background-color: #ffa200;
+      color: white;
+    }
+    header {
+      text-align: center;
+      padding: 20px;
+      background: #0077b6;
+      color: #fff;
+    }
+    header h1 {
+      font-size: 2.2em;
+    }
+    header p {
+      font-size: 1em;
+      margin-top: 5px;
+    }
+    main {
+      flex: 1;
+      padding: 20px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    section {
+      background: rgba(255, 255, 255, 0.9);
+      padding: 20px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      color: #333;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+    form label {
+      font-weight: bold;
+      margin-bottom: -10px;
+    }
+    form input, form button {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 1em;
+    }
+    form input::placeholder {
+      color: #888;
+    }
+    form button {
+      background-color: #0077b6;
+      color: white;
+      border: none;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      font-weight: bold;
+    }
+    form button:hover {
+      background-color: #005f87;
+    }
+    footer {
+      background: #0077b6;
+      color: #fff;
+      text-align: center;
+      padding: 15px;
+      font-size: 0.9em;
+      margin-top: auto;
+    }
+    #password-strength {
+      height: 8px;
+      border-radius: 5px;
+      margin-top: -8px;
+      background-color: #ccc;
+      transition: background-color 0.3s;
+    }
+    #strength-text {
+      margin-top: 5px;
+      font-weight: bold;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="nav-left">
+      <a href="index.html">🏠 Buscar Plantões</a>
+    </div>
+    <div class="nav-right">
+      <a href="login.html" class="login-button">Login</a>
+    </div>
+  </nav>
+
+  <header>
+    <h1>Cadastro - Encontre Plantões Médicos</h1>
+    <p>Cadastre-se para ter acesso às melhores oportunidades de plantões médicos.</p>
+  </header>
+
+  <main>
+    <section id="cadastro">
+      <h2>Formulário de Cadastro</h2>
+      <form id="cadastro-form">
+        <label for="name">Nome Completo:</label>
+        <input type="text" id="name" name="name" placeholder="Digite seu nome completo" required>
+
+        <label for="email">E-mail:</label>
+        <input type="email" id="email" name="email" placeholder="Digite seu e-mail" required>
+
+        <label for="password">Senha:</label>
+        <input type="password" id="password" name="password" placeholder="Crie uma senha" required>
+        <div id="password-strength"></div>
+        <small id="strength-text"></small>
+
+        <label for="crm">CRM:</label>
+        <input type="text" id="crm" name="crm" maxlength="6" placeholder="Digite seu número do CRM (6 dígitos)" required>
+
+        <button type="submit">Cadastrar</button>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Encontre Plantões Médicos. Lucas Tavares Hauber.</p>
+  </footer>
+
+  <script>
+    const form = document.getElementById("cadastro-form");
+    const passwordInput = document.getElementById("password");
+    const strengthBar = document.getElementById("password-strength");
+    const strengthText = document.getElementById("strength-text");
+
+    function checkPasswordStrength(password) {
+      let strength = 0;
+      if (password.length >= 6) strength++;
+      if (/[A-Z]/.test(password)) strength++;
+      if (/\d/.test(password)) strength++;
+      if (/[^A-Za-z0-9]/.test(password)) strength++;
+      return strength;
+    }
+
+    passwordInput.addEventListener("input", () => {
+      const password = passwordInput.value;
+      const strength = checkPasswordStrength(password);
+      let color = "#ccc";
+      let text = "";
+
+      switch (strength) {
+        case 0:
+        case 1:
+          color = "#ff4d4d";
+          text = "Senha fraca";
+          break;
+        case 2:
+        case 3:
+          color = "#ffcc00";
+          text = "Senha média";
+          break;
+        case 4:
+          color = "#4caf50";
+          text = "Senha forte";
+          break;
+      }
+
+      strengthBar.style.backgroundColor = color;
+      strengthText.textContent = text;
+      strengthText.style.color = color;
+    });
+
+    form.addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      const name = document.getElementById("name").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const password = passwordInput.value.trim();
+      const crm = document.getElementById("crm").value.trim();
+
+      if (!name || !email || !password || !crm) {
+        alert("Por favor, preencha todos os campos.");
+        return;
+      }
+
+      if (crm.length !== 6 || !/^\d{6}$/.test(crm)) {
+        alert("O CRM deve ter exatamente 6 dígitos numéricos.");
+        return;
+      }
+
+      const users = JSON.parse(localStorage.getItem("users")) || [];
+
+      if (users.find(u => u.email === email)) {
+        alert("Este e-mail já está cadastrado.");
+        return;
+      }
+
+      users.push({ name, email, password, crm });
+      localStorage.setItem("users", JSON.stringify(users));
+
+      alert("Cadastro realizado com sucesso!");
+      form.reset();
+      strengthBar.style.backgroundColor = "#ccc";
+      strengthText.textContent = "";
+      window.location.href = "login.html";
+    });
+  </script>
+</body>
+</html>

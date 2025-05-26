@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Faça seu login para encontrar plantões médicos." />
+  <meta name="keywords" content="login, médicos, plantões médicos" />
+  <meta name="author" content="Lucas Tavares Hauber" />
+  <title>Login - Encontre Plantões Médicos</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    html, body {
+      height: 100%;
+      font-family: 'Roboto', sans-serif;
+    }
+    body {
+      background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.8)), url('fundo.jpg') no-repeat center center fixed;
+      background-size: cover;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+    }
+    nav {
+      background: #005f87;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 30px;
+    }
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+    nav a:hover {
+      color: #ffaa00;
+    }
+    .login-button {
+      background-color: #ffaa00;
+      color: #333;
+      padding: 10px 20px;
+      border-radius: 5px;
+      font-weight: bold;
+      transition: all 0.3s;
+    }
+    .login-button:hover {
+      background-color: #ffb300;
+      color: white;
+    }
+    header {
+      text-align: center;
+      padding: 40px 20px 20px;
+      background: #0077b6;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    }
+    header h1 {
+      font-size: 2.5em;
+      margin-bottom: 10px;
+    }
+    main {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    section#login {
+      background: rgba(255, 255, 255, 0.98);
+      color: #333;
+      padding: 40px 30px;
+      border-radius: 12px;
+      max-width: 400px;
+      width: 100%;
+      box-shadow: 0 0 20px rgba(0,0,0,0.4);
+      animation: fadeIn 0.6s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    #login h2 {
+      text-align: center;
+      margin-bottom: 25px;
+      color: #0077b6;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+    .input-group {
+      position: relative;
+    }
+    .input-group i {
+      position: absolute;
+      top: 50%;
+      left: 10px;
+      transform: translateY(-50%);
+      color: #999;
+    }
+    .input-group input {
+      padding: 10px 10px 10px 35px;
+      width: 100%;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      background: #f9f9f9;
+      font-size: 1em;
+    }
+    form button {
+      background-color: #0077b6;
+      color: white;
+      padding: 12px;
+      border: none;
+      border-radius: 5px;
+      font-size: 1em;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    form button:hover {
+      background-color: #005f87;
+    }
+    .signup-link {
+      text-align: center;
+      margin-top: 15px;
+    }
+    .signup-link a {
+      color: #0077b6;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .signup-link a:hover {
+      color: #ff0000;
+    }
+    footer {
+      background: #0077b6;
+      color: #fff;
+      text-align: center;
+      padding: 15px;
+      font-size: 0.9em;
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html">🏠 Início</a>
+    <a href="cadastro.html" class="login-button">Cadastrar-se</a>
+  </nav>
+
+  <header>
+    <h1>Login - Encontre Plantões Médicos</h1>
+    <p>Faça seu login para acessar as oportunidades de plantões médicos.</p>
+  </header>
+
+  <main>
+    <section id="login">
+      <h2>Login</h2>
+      <form>
+        <div class="input-group">
+          <i class="fas fa-envelope"></i>
+          <input type="email" id="email" placeholder="Digite seu e-mail" required>
+        </div>
+        <div class="input-group">
+          <i class="fas fa-lock"></i>
+          <input type="password" id="password" placeholder="Digite sua senha" required>
+        </div>
+        <button type="submit">Entrar</button>
+      </form>
+      <div class="signup-link">
+        <p>Não tem uma conta? <a href="cadastro.html">Cadastre-se</a></p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Encontre Plantões Médicos. Lucas Tavares Hauber.</p>
+  </footer>
+
+  <script>
+    const usuariosCadastrados = [
+      { email: "medico1@teste.com", senha: "123456" },
+      { email: "medica2@teste.com", senha: "abcdef" }
+    ];
+  
+    document.querySelector("form").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const email = document.getElementById("email").value;
+      const senha = document.getElementById("password").value;
+  
+      const usuarioEncontrado = usuariosCadastrados.find(u => u.email === email && u.senha === senha);
+  
+      if (usuarioEncontrado) {
+        alert("Login bem-sucedido! 😄");
+        window.location.href = "encontrar-plantoes.html"; // redireciona para a página certa
+      } else {
+        alert("E-mail ou senha inválidos. 😕");
+      }
+    });
+  </script>
+
+</body>
+</html>

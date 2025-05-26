@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Conectando médicos a plantões com facilidade." />
+  <title>Encontre Plantões Médicos</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet"/>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    body {
+      background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.6)), url('fundo.jpg') no-repeat center center fixed;
+      background-size: cover;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    nav {
+      background: rgba(0, 87, 118, 0.85);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 30px;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    }
+
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+      margin-left: 15px;
+      transition: transform 0.3s ease, color 0.3s ease;
+    }
+
+    nav a:hover {
+      color: #ffb703;
+      transform: scale(1.1);
+    }
+
+    .login-button {
+      background-color: #ffb703;
+      color: #333;
+      padding: 10px 20px;
+      border-radius: 25px;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .login-button:hover {
+      background-color: #ffaa00;
+      color: #000;
+    }
+
+    header {
+      text-align: center;
+      padding: 160px 20px 80px;
+      flex-grow: 1;
+    }
+
+    header h1 {
+      font-size: 3em;
+      animation: fadeIn 1s ease forwards;
+    }
+
+    header p {
+      margin-top: 20px;
+      font-size: 1.2em;
+      animation: fadeIn 1.5s ease forwards;
+    }
+
+    .actions {
+      margin-top: 40px;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      animation: fadeIn 2s ease forwards;
+    }
+
+    .actions a {
+      background-color: #0077b6;
+      color: white;
+      padding: 12px 25px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background 0.3s ease;
+    }
+
+    .actions a:hover {
+      background-color: #023e8a;
+    }
+
+    .offer-vagas {
+      margin-top: 60px; /* Mais espaço entre as ações e o rodapé */
+      text-align: center;
+      background-color: rgba(0, 87, 118, 0.8); /* Fundo mais suave */
+      padding: 40px 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .offer-vagas h2 {
+      font-size: 2em;
+      color: #ffb703;
+      margin-bottom: 20px;
+    }
+
+    .offer-vagas p {
+      font-size: 1.1em;
+      margin-bottom: 20px;
+    }
+
+    .offer-vagas a {
+      color: #ffb703;
+      text-decoration: none;
+      font-weight: bold;
+      padding: 12px 30px;
+      border: 2px solid #ffb703;
+      border-radius: 25px;
+      background-color: transparent;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    .offer-vagas a:hover {
+      background-color: #ffb703;
+      color: #000;
+    }
+
+    footer {
+      background-color: #0077b6;
+      text-align: center;
+      padding: 15px;
+      font-size: 0.9em;
+      color: #fff;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-left">
+      <a href="#">🏠 Início</a>
+    </div>
+    <div class="nav-right">
+      <a href="login.html" class="login-button">Login</a>
+      <a href="cadastro.html" class="login-button">Cadastrar-se</a>
+    </div>
+  </nav>
+
+  <header>
+    <h1>Bem-vindo ao</h1>
+    <h1>Encontre Plantões Médicos</h1>
+    <p>Conectamos médicos a oportunidades de plantão em todo o Brasil com praticidade e rapidez.</p>
+    <div class="actions">
+      <a href="login.html">Já tenho conta</a>
+      <a href="cadastro.html">Quero me cadastrar</a>
+    </div>
+  </header>
+
+  <div class="offer-vagas">
+    <h2>Você é um hospital?</h2>
+    <p>Se você é um hospital ou clínica e deseja oferecer vagas de plantão médico, clique abaixo para cadastrar suas vagas.</p>
+    <a href="Cadastro-hospital.html">Ofertar Vagas</a>
+  </div>
+
+  <footer>
+    <p>&copy; 2025 Encontre Plantões Médicos. Lucas Tavares Hauber.</p>
+  </footer>
+
+</body>
+</html>

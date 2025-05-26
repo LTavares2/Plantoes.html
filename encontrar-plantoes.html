@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Encontrar Plantões</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    /* (mesmo CSS que você já tinha, mantido sem mudanças) */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Roboto', sans-serif;
+      background: linear-gradient(to bottom, #0077b6, #48cae4);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      color: #333;
+    }
+    header {
+      background-color: #023e8a;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    header a {
+      color: #fff;
+      font-weight: bold;
+      text-decoration: none;
+      float: left;
+      margin-left: 20px;
+    }
+    main {
+      flex: 1;
+      padding: 30px 20px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    .filtros {
+      background-color: rgba(255, 255, 255, 0.95);
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      margin-bottom: 30px;
+    }
+    .filtros label {
+      font-weight: bold;
+      display: block;
+      margin-bottom: 5px;
+      margin-top: 15px;
+    }
+    .filtros select, .filtros button {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 1em;
+    }
+    .hospital-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+    .card {
+      background-color: #f9f9f9;
+      border-left: 5px solid #0077b6;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    .card h3 {
+      margin-bottom: 10px;
+    }
+    .card button {
+      background-color: #0077b6;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    .card button:hover {
+      background-color: #023e8a;
+    }
+    footer {
+      background-color: #023e8a;
+      color: white;
+      text-align: center;
+      padding: 15px;
+      position: relative;
+      bottom: 0;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <a href="index.html">🏠 Voltar</a>
+    <h1>Encontrar Plantões</h1>
+  </header>
+
+  <main>
+    <section class="filtros">
+      <label for="estado">Estado</label>
+      <select id="estado">
+        <option value="">Selecione o estado</option>
+      </select>
+
+      <label for="cidade">Cidade</label>
+      <select id="cidade">
+        <option value="">Selecione a cidade</option>
+      </select>
+
+      <label for="especialidade">Especialidades Médicas</label>
+      <select id="especialidade" multiple size="5">
+        <option value="cardiologia">Cardiologia</option>
+        <option value="ortopedia">Ortopedia</option>
+        <option value="pediatria">Pediatria</option>
+        <option value="clínica geral">Clínica Geral</option>
+        <option value="anestesiologia">Anestesiologia</option>
+      </select>
+
+      <button onclick="buscarPlantoes()">Buscar Plantões</button>
+    </section>
+
+    <section class="hospital-cards" id="resultado">
+      <!-- Cards aparecerão aqui -->
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Encontre Plantões Médicos. Lucas Tavares Hauber.</p>
+  </footer>
+
+  <script>
+    // Carrega estados do IBGE
+    async function carregarEstados() {
+      const estadoSelect = document.getElementById("estado");
+      const res = await fetch("https://servicodados.ibge.gov.br/api/v1/localidades/estados?orderBy=nome");
+      const estados = await res.json();
+
+      estados.forEach(estado => {
+        const option = document.createElement("option");
+        option.value = estado.sigla;
+        option.textContent = estado.nome;
+        estadoSelect.appendChild(option);
+      });
+    }
+
+    // Carrega cidades com base no estado selecionado
+    async function carregarCidades(siglaEstado) {
+      const cidadeSelect = document.getElementById("cidade");
+      cidadeSelect.innerHTML = '<option value="">Selecione a cidade</option>';
+
+      if (!siglaEstado) return;
+
+      const res = await fetch(`https://servicodados.ibge.gov.br/api/v1/localidades/estados/${siglaEstado}/municipios`);
+      const cidades = await res.json();
+
+      cidades.forEach(cidade => {
+        const option = document.createElement("option");
+        option.value = cidade.nome;
+        option.textContent = cidade.nome;
+        cidadeSelect.appendChild(option);
+      });
+    }
+
+    document.getElementById("estado").addEventListener("change", e => {
+      carregarCidades(e.target.value);
+    });
+
+    function buscarPlantoes() {
+      const cidade = document.getElementById("cidade").value;
+      const estado = document.getElementById("estado").value;
+      const especialidadeSelect = document.getElementById("especialidade");
+      const especialidades = Array.from(especialidadeSelect.selectedOptions).map(op => op.value);
+
+      const resultado = document.getElementById("resultado");
+      resultado.innerHTML = "";
+
+      if (cidade && estado && especialidades.length > 0) {
+        const card = document.createElement("div");
+        card.className = "card";
+        card.innerHTML = `
+          <h3>Hospital Central - ${cidade}</h3>
+          <p><strong>Estado:</strong> ${estado}</p>
+          <p><strong>Especialidades:</strong> ${especialidades.join(", ")}</p>
+          <p><strong>Turno:</strong> Noite</p>
+          <p><strong>Contato:</strong> plantao@hospital.com</p>
+          <button onclick="alert('Candidatura enviada! ✅')">Candidatar-se</button>
+        `;
+        resultado.appendChild(card);
+      } else {
+        alert("Preencha todos os campos para buscar.");
+      }
+    }
+
+    // Inicializa a página carregando os estados
+    window.onload = carregarEstados;
+  </script>
+</body>
+</html>
